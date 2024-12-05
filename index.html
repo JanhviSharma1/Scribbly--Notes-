@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Elsie+Swash+Caps:wght@400;900&family=Handlee&family=Kalnia+Glaze:wght@100..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Satisfy&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container my-4">
+    <h1 class="text-center mb-4 font">Scribbly</h1>
+
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <button class="nav-link active" onclick="switchView('active')">Active Notes</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" onclick="switchView('archive')">Archived Notes</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" onclick="switchView('trash')">Trash</button>
+      </li>
+    </ul>
+    <br>
+
+    <!-- Active Notes Section -->
+    <div id="activeSection">
+      <button class="btn btn-primary mb-3 addbutton " onclick="showModal()">
+        <svg height="64px" width="64px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <polygon style="fill:#FF7099;"
+              points="501.801,213.023 298.977,213.023 298.977,10.199 213.023,10.199 213.023,213.023 10.199,213.023 10.199,298.977 213.023,298.977 213.023,501.801 298.977,501.801 298.977,298.977 501.801,298.977 ">
+            </polygon>
+            <g>
+              <path style="fill:#DB006E;"
+                d="M298.978,512h-85.956c-5.632,0-10.199-4.566-10.199-10.199V309.177H10.199 C4.567,309.177,0,304.61,0,298.977v-85.956c0-5.633,4.567-10.199,10.199-10.199h192.623V10.199C202.822,4.566,207.39,0,213.022,0 h85.956c5.632,0,10.199,4.566,10.199,10.199v192.623h192.624c5.632,0,10.199,4.566,10.199,10.199v85.956 c0,5.633-4.567,10.199-10.199,10.199H309.178v192.624C309.178,507.434,304.61,512,298.978,512z M223.221,491.602h65.557V298.977 c0-5.633,4.567-10.199,10.199-10.199h192.624v-65.557H298.978c-5.632,0-10.199-4.566-10.199-10.199V20.398h-65.557v192.623 c0,5.633-4.567,10.199-10.199,10.199H20.398v65.557h192.623c5.632,0,10.199,4.566,10.199,10.199V491.602z">
+              </path>
+              <path style="fill:#DB006E;"
+                d="M425.307,278.438H322.24c-5.632,0-10.199-4.566-10.199-10.199s4.567-10.199,10.199-10.199h103.067 c5.632,0,10.199,4.566,10.199,10.199S430.939,278.438,425.307,278.438z">
+              </path>
+              <path style="fill:#DB006E;"
+                d="M466.104,278.438h-6.901c-5.632,0-10.199-4.566-10.199-10.199s4.567-10.199,10.199-10.199h6.901 c5.632,0,10.199,4.566,10.199,10.199S471.736,278.438,466.104,278.438z">
+              </path>
+            </g>
+          </g>
+        </svg> <br>
+        Add Note</button>
+      <div id="activeNotes"></div>
+    </div>
+
+    <!-- Archived Notes Section -->
+    <div id="archiveSection" style="display: none;">
+      <div id="archivedNotes"></div>
+    </div>
+
+    <!-- Trash Section -->
+    <div id="trashSection" style="display: none;">
+      <div id="trashedNotes">bole chudiya</div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="noteModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add/Edit Note</h5>
+            <button type="button" class="btn-close" onclick="closeModal()"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="noteTitle" class="form-label">Title</label>
+              <input type="text" class="form-control" id="noteTitle">
+            </div>
+            <div class="mb-3">
+              <label for="noteDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="noteDescription" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+            <button type="button" class="btn btn-primary" id="saveNoteButton" onclick="saveNote()">Save Note</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

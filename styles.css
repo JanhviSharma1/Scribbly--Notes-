@@ -1,0 +1,30 @@
+.note-card {
+    border: 1px solid pink;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.font{
+    font-family: "Elsie Swash Caps", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size:70px;
+}
+body{
+    background-image: url(bg.jpg);
+}
+.addbutton{
+    padding:40px;
+    background-color: pink;
+    border-color: pink;
+    color:black;
+}
+.addbutton:hover {
+    background-color: rgb(237, 144, 180);
+    color: black;
+    border-color: pink;
+}
+.pink{
+    background-color: #DB006E;
+    color:black;
+}
